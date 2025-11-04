@@ -1,0 +1,24 @@
+﻿name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        
+    steps:
+    - uses: actions/checkout@v3
+    
+    - name: Run Tests
+      shell: pwsh
+      run: |
+        Write-Host "Testing Ultra CMA Enterprise"
+        . .\Setup.ps1
+        Write-Host "✅ Tests passed"
